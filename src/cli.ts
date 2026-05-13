@@ -1,6 +1,7 @@
 import { Command } from "commander";
-import fetchTrendingRepos from "./commands/trending.command.js";
-import getSinceDate from "./utils/formatter.js";
+import fetchTrendingRepos from "./services/github.service.js";
+import getSinceDate from "./utils/date-fn.js";
+import { error, log } from "./utils/logger.js";
 
 export const program = new Command();
 
@@ -13,7 +14,6 @@ program
   .option("-d, --duration <duration>", "day | week | month | year", "week")
   .option("-L, --language <language>", "programming language", "all")
   .option("-l, --limit <number>", "number of repos", "10")
-
   .action(async (options) => {
     const { duration, language, limit } = options;
 
@@ -24,17 +24,8 @@ program
         language,
       });
 
-      console.table(
-        repos.map((repo: any) => ({
-          Repository_name: repo.name,
-          Owner: repo.full_name,
-          Stars: `⭐ ${repo.stargazers_count}`,
-          Description: repo.description,
-          URL: repo.html_url,
-          language: repo.language,
-        })),
-      );
+      console.log("Trending Repositories:", repos);
     } catch (err: any) {
-      console.error("Error:", err.message);
+      log(error("Error:", err.message));
     }
   });

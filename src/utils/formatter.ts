@@ -1,16 +1,12 @@
-export default function getSinceDate(duration: string) {
-  const now = new Date();
+import type { FormattedRepo, GitHubRepo } from "../types/github.types.js";
 
-  switch (duration) {
-    case "daily":
-      now.setDate(now.getDate() - 1);
-      break;
-    case "weekly":
-      now.setDate(now.getDate() - 7);
-      break;
-    case "monthly":
-      now.setMonth(now.getMonth() - 1);
-      break;
-  }
-  return now.toISOString().split("T")[0];
+export function formatRepository(repos: GitHubRepo[]): FormattedRepo[] {
+  return repos.map((repo) => ({
+    name: repo.name,
+    owner: repo.full_name,
+    stars: repo.stargazers_count,
+    language: repo.language ?? "Unknown",
+    description: repo.description ?? "No description",
+    url: repo.html_url,
+  }));
 }

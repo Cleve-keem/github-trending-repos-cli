@@ -5,7 +5,7 @@ A simple command-line tool to fetch and display trending GitHub repositories usi
 ## Features
 
 - Query GitHub repositories sorted by stars
-- Filter by creation date range: `day`, `week`, or `month`
+- Filter by creation date range: `day`, `week`,`month` or `year`
 - Filter by programming language
 - Limit the number of results returned
 - View output in a clean table format

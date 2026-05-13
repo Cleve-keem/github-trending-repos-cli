@@ -1,39 +1,22 @@
-import axios from "axios";
+import { githubAPI } from "../apis/github.api.js";
+import getSinceDate from "../utils/date-fn.js";
+import { formatRepository } from "../utils/formatter.js";
 
-export async function githubService(params: {
+export default async function fetchTrendingRepos({
+  sinceDate = "week",
+  limit = 10,
+  language = "all",
+}: {
   sinceDate: string;
   limit: number;
   language: string;
 }) {
-  const { sinceDate, limit, language } = params;
+  const formattedDate = getSinceDate(sinceDate);
+  const repository = await githubAPI({
+    sinceDate: formattedDate as string,
+    limit,
+    language,
+  });
 
-  try {
-    const queryParts = [`created:>${sinceDate}`];
-
-    if (language && language !== "all") {
-      queryParts.push(`language:${language}`);
-    }
-
-    const response = await axios.get(
-      "https://api.github.com/search/repositories",
-      {
-        params: {
-          q: queryParts.join(" "),
-          sort: "stars",
-          order: "desc",
-          per_page: limit,
-        },
-        headers: {
-          Accept: "application/vnd.github+json",
-        },
-      },
-    );
-
-    return response.data.items;
-  } catch (error: any) {
-    throw new Error(
-      error?.response?.data?.message ||
-        "Failed to fetch repositories from GitHub API",
-    );
-  }
+  return formatRepository(repository);
 }
