@@ -24,8 +24,6 @@ program
         language,
       });
 
-      console.log(repos);
-
       console.table(
         repos.map((repo: any) => ({
           Repository_name: repo.name,
