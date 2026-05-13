@@ -13,7 +13,7 @@ export default async function fetchTrendingRepos({
 }) {
   const formattedDate = getSinceDate(sinceDate);
   const repository = await githubAPI({
-    sinceDate: formattedDate as string,
+    sinceDate: formattedDate!,
     limit,
     language,
   });

@@ -14,7 +14,7 @@ export async function githubAPI(params: {
       queryParts.push(`language:${language}`);
     }
 
-    const response = await axios.get(
+    const response = await axios.get<{ items: GitHubRepo[] }>(
       "https://api.github.com/search/repositories",
       {
         params: {

@@ -1,7 +1,7 @@
 import { Command } from "commander";
 import fetchTrendingRepos from "./services/github.service.js";
-import getSinceDate from "./utils/date-fn.js";
 import { error, log } from "./utils/logger.js";
+import displayRepository from "./utils/display.js";
 
 export const program = new Command();
 
@@ -19,12 +19,11 @@ program
 
     try {
       const repos = await fetchTrendingRepos({
-        sinceDate: getSinceDate(duration) as string,
+        sinceDate: duration,
         limit: Number(limit),
         language,
       });
-
-      console.log("Trending Repositories:", repos);
+      displayRepository(repos);
     } catch (err: any) {
       log(error("Error:", err.message));
     }
