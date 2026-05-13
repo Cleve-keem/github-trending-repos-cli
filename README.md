@@ -2,6 +2,10 @@
 
 A simple command-line tool to fetch and display trending GitHub repositories using GitHub Search API filters for duration, language, and result limit.
 
+## Inspiration
+
+This project is inspired by the [Github-Trending-CLI](https://roadmap.sh/projects/github-trending-cli) from roadmap.sh.
+
 ## Features
 
 - Query GitHub repositories sorted by stars
