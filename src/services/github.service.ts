@@ -1,25 +1,33 @@
 import axios from "axios";
 
-const BASE_URL = "https://api.github.com";
-
-export async function fetchTrendingRepos(params: {
+export async function githubService(params: {
   sinceDate: string;
   limit: number;
+  language: string;
 }) {
-  const { sinceDate, limit } = params;
+  const { sinceDate, limit, language } = params;
 
   try {
-    const response = await axios.get(`${BASE_URL}/search/repositories`, {
-      params: {
-        q: `created:>${sinceDate}`,
-        sort: "stars",
-        order: "desc",
-        per_page: limit,
+    const queryParts = [`created:>${sinceDate}`];
+
+    if (language && language !== "all") {
+      queryParts.push(`language:${language}`);
+    }
+
+    const response = await axios.get(
+      "https://api.github.com/search/repositories",
+      {
+        params: {
+          q: queryParts.join(" "),
+          sort: "stars",
+          order: "desc",
+          per_page: limit,
+        },
+        headers: {
+          Accept: "application/vnd.github+json",
+        },
       },
-      headers: {
-        Accept: "application/vnd.github+json",
-      },
-    });
+    );
 
     return response.data.items;
   } catch (error: any) {
