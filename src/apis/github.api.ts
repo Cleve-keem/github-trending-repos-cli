@@ -1,5 +1,6 @@
 import axios from "axios";
 import type { GitHubRepo } from "../types/github.types.js";
+import GitHubError from "../errors/github.error.js";
 
 export async function githubAPI(params: {
   sinceDate: string;
@@ -31,7 +32,7 @@ export async function githubAPI(params: {
 
     return response.data.items;
   } catch (error: any) {
-    throw new Error(
+    throw new GitHubError(
       error?.response?.data?.message ||
         "Failed to fetch repositories from GitHub API",
     );

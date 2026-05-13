@@ -1,6 +1,7 @@
 import { githubAPI } from "../apis/github.api.js";
-import getSinceDate from "../utils/date-fn.js";
+import getSinceDate from "../utils/date.utils.js";
 import { formatRepository } from "../utils/formatter.js";
+import validateDuration from "../utils/validator.js";
 
 export default async function fetchTrendingRepos({
   sinceDate = "week",
@@ -11,9 +12,10 @@ export default async function fetchTrendingRepos({
   limit: number;
   language: string;
 }) {
+  validateDuration(sinceDate);
   const formattedDate = getSinceDate(sinceDate);
   const repository = await githubAPI({
-    sinceDate: formattedDate!,
+    sinceDate: formattedDate,
     limit,
     language,
   });

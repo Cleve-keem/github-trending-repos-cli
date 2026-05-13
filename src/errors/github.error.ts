@@ -1,5 +1,5 @@
 export default class GitHubError extends Error {
-  constructor(public message: string) {
+  constructor(message: string) {
     super(message);
     this.name = "GitHubAPIError";
   }

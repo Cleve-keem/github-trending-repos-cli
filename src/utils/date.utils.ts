@@ -1,4 +1,4 @@
-export default function getSinceDate(duration: string) {
+export default function getSinceDate(duration: string): string {
   const now = new Date();
 
   switch (duration) {
@@ -18,5 +18,5 @@ export default function getSinceDate(duration: string) {
       throw new Error("Invalid duration. Use day | week | month | year");
   }
 
-  return now.toISOString().split("T")[0];
+  return now.toISOString().split("T")[0] as string;
 }

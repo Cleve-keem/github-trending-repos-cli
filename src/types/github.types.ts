@@ -1,6 +1,8 @@
 export interface GitHubRepo {
-  full_name: string;
   name: string;
+  owner: {
+    login: string;
+  };
   stargazers_count: number;
   language: string | null;
   description: string | null;
@@ -11,7 +13,7 @@ export interface FormattedRepo {
   name: string;
   owner: string;
   stars: number;
-  language: string | null;
-  description: string | null;
+  language: string;
+  description: string;
   url: string;
 }
