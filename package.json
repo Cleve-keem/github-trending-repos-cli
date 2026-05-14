@@ -4,7 +4,7 @@
   "description": "Fetch trending GitHub repositories by duration",
   "main": "./dist/index.js",
   "bin": {
-    "trending-repos": "./dist/index.js"
+    "trending-repos": "dist/index.js"
   },
   "type": "module",
   "scripts": {
