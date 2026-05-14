@@ -78,4 +78,4 @@ pnpm dev -- -d week -L js -l 10
 
 ## License
 
-This project is licensed under `ISC`.
+This project is licensed under `MIT`.

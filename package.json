@@ -2,17 +2,28 @@
   "name": "github-trending-repos-cli",
   "version": "1.0.0",
   "description": "Fetch trending GitHub repositories by duration",
-  "main": "src/index.js",
+  "main": "./dist/index.js",
   "bin": {
     "trending-repos": "./dist/index.js"
   },
   "type": "module",
   "scripts": {
-    "dev": "tsx src/index.ts"
+    "dev": "tsx src/index.ts",
+    "build": "tsup",
+    "start": "node dist/index.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "github",
+    "trending",
+    "typescript",
+    "cli",
+    "devtools"
+  ],
+  "author": "Hackhim",
+  "license": "MIT",
   "packageManager": "pnpm@10.19.0",
   "dependencies": {
     "axios": "^1.16.0",
